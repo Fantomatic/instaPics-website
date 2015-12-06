@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using instaPics_website.Models;
+using instaPics_website.Models.POCO;
 
 namespace instaPics_website.Controllers
 {
@@ -13,18 +15,16 @@ namespace instaPics_website.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public string userConnect(string username )
         {
-            ViewBag.Message = "Your application description page.";
+            LoginModel testLogin = new LoginModel();
+            UserEntity result = testLogin.Connect(username);
+            if(result.Username != "error")
+            {
+                SessionUser.Username = result.Username;
+            }
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return result.Username;
         }
     }
 }

@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using instaPics_website.Models.POCO;
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    <title>IngePicture - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body ng-app="AppInstaPics">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,13 +18,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nom de l'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("InstaPics", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Connexion", "Index", "Home")</li>
+                    @{
+                        if (SessionUser.Username.Length > 0)
+                        {
+                            <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -31,13 +36,16 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="col-md-12 col-md-offset-4">
+            <p>&copy; @DateTime.Now.Year - IngePicture</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/angular.min.js")
+    @Scripts.Render("~/Scripts/angular-route.min.js")
+    @Scripts.Render("~/Controllers/controllers.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
