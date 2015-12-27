@@ -8,7 +8,6 @@ namespace instaPics_website.Models.POCO
 {
     public static class SessionUser
     {
-        //public static string Username { get; set; }
         private static string username = "";
 
         public static string Username

@@ -19,7 +19,7 @@ namespace instaPics_website.Models
             var storageAccount = CloudStorageAccount.Parse(connectionString);
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference(CloudConfigurationManager.GetSetting(Constants.TableStringKey));
+            CloudTable table = tableClient.GetTableReference(CloudConfigurationManager.GetSetting(Constants.TableUserStringKey));
             table.CreateIfNotExists();
 
             string test = _username;

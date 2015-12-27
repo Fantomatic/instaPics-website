@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using instaPics_website.Models;
+using System.Web.Routing;
 
 namespace instaPics_website.Controllers
 {
@@ -15,12 +16,12 @@ namespace instaPics_website.Controllers
             return View();
         }
 
-        public string uploadImage(string file)
+        public void uploadImage(HttpPostedFileBase file)
         {
             AccueilModel uploadImg = new AccueilModel();
-            string result = uploadImg.UploadImage(file);
+            uploadImg.UploadImage(file);
 
-            return result;
+            Response.Redirect(new Uri(Request.Url, Url.Action("Index", "Accueil")).ToString());
         }
     }
 }
