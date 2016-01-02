@@ -15,19 +15,15 @@ namespace instaPics_website.Models
     {
         public UserEntity Connect(string _username)
         {
-            string connectionString = CloudConfigurationManager.GetSetting(Constants.ConnStringKey);
-            var storageAccount = CloudStorageAccount.Parse(connectionString);
+            CloudTable table = CreateCloudAzure.TableClient(Constants.TableUserStringKey);
 
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference(CloudConfigurationManager.GetSetting(Constants.TableUserStringKey));
-            table.CreateIfNotExists();
-
-            string test = _username;
             try
             {
+                //récupération de l'utilisateur passé en paramètre
                 IEnumerable<UserEntity> query = (from User in table.CreateQuery<UserEntity>() where User.Username == _username select User);
 
                 List<UserEntity> allUser = query.ToList<UserEntity>();
+                //s'il existe, on le retourne sinon on le crée puis on le retourne
                 if (allUser.Count > 0)
                 {
                     return allUser[0];

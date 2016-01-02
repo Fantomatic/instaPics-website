@@ -8,6 +8,7 @@ using System.Web;
 
 namespace instaPics_website.Models.POCO
 {
+    //dans la tale, un utilisateur a une image original, l'image original mais en thumb, la version en noir et blanc en taille normal, et la version en noir et blanc en thumb
     public class UserImageEntity : TableEntity
     {
         public string user { get; set; }

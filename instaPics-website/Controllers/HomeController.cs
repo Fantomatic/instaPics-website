@@ -12,9 +12,12 @@ namespace instaPics_website.Controllers
     {
         public ActionResult Index()
         {
+            SessionUser.Username = "";
             return View();
         }
 
+        //fonction qui va appeler le Model pour rechercher/créer l'utilisateur
+        //retour le résultat au controller d'angularjs
         public string userConnect(string username )
         {
             LoginModel testLogin = new LoginModel();

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace instaPics_website.Models.POCO
 {
-    //entity de l'utilisateur permettant l'ajout à la table
-    public class UserEntity : TableEntity
+    //classe pour la tale qui permet de relier un utilisateur à une image en favoris 
+    public class ImgFavEntity: TableEntity
     {
         public string Username { get; set; }
+        public string NameImage { get; set; }
     }
 }

@@ -1,29 +1,16 @@
-﻿var app = angular.module('AppInstaPics', ['ngRoute']);
+﻿//déclaration du module d'angular
+var app = angular.module('AppInstaPics', ['ngRoute']);
 
-
-app.directive('file', function () {
-    return {
-        scope: {
-            file: '='
-        },
-        link: function (scope, el, attrs) {
-            el.bind('change', function (event) {
-                var files = event.target.files;
-                var file = files[0];
-                //scope.file = file ? file.name : undefined;
-                scope.file = file;
-                scope.$apply();
-            });
-        }
-    };
-});
-
+//déclaration des Constantes
+//peut être utile si on appelle plusieurs fois la même action
 app.constant('Config', {
-    ActionLoginHome: 'Home/userConnect',
-    ActionUpload: 'Accueil/uploadImage'
+    ActionLoginHome: 'Home/userConnect'
 });
 
+//controller login
 app.controller('LoginController', function ($scope, $http, $rootScope, Config) {
+//à la soumission du formulaire de login
+//appele le controller .NET qui va vérifier/créer le login et redirige vers l'espace client si tout se passe bien
     $scope.login = function () {
         $http({
             method: 'POST',
@@ -43,20 +30,3 @@ app.controller('LoginController', function ($scope, $http, $rootScope, Config) {
         });
     }
 });
-
-
-//pas utilisé car problème lors de l'nvoie des fichiers en angularjs
-/*app.controller('AccueilController', function ($scope, $http, $rootScope, Config) {
-    $scope.upload = function () {
-        $http({
-            method: 'POST',
-            url: Config.ActionUpload,
-            headers : { 'enctype' : 'multipart/form-data'},
-            data: { file: $scope.file }
-        }).then(function successCallback(response) {
-            console.log(response);
-        }, function errorCallback(data) {
-            $scope.resultUpload = "Une erreur est survenu lors de l'upload de l'image";
-        });
-    }
-});*/

@@ -4,7 +4,7 @@
         <form role="form" ng-submit="login()">
             <div class="form-group">
                 <label for="username">Nom de l'utilisateur</label>
-                <input type="text" class="form-control" id="username" ng-model="username" required/>
+                <input type="text" class="form-control" ng-model="username" required/>
                 <div ng-if="resultLogin.length > 0" class="error">{{resultLogin}}</div>
             </div>
             <div class="col-md-offset-1">
