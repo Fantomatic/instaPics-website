@@ -1,0 +1,123 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <!--bouton permettant l'appel à la modal pour uploader les images-->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalUpload">Uploader une image</button>
+
+        <!--partie de mes images en couleurs-->
+        <section class="imgoriginal row">
+            <h3>Mes images en couleurs</h3>
+            @{
+                if (ViewBag.listImgUser.Count > 0)
+                {
+                    foreach (instaPics_website.Models.POCO.StringImage img in ViewBag.listImgUser)
+                    {
+                    <div class="col-md-2">
+                        <p><img src="@img.uri" alt="img" /></p>
+                    </div>
+                    }
+                }
+                else
+                {
+                    <h5>Aucune de vos images n'a été traitée</h5>
+                }
+
+             }
+        </section>
+
+        <!--partie de mes images en noirs et blancs-->
+        <section class="imgbn row">
+            <h3>Mes images en noirs et blancs</h3>
+            @{
+                if (ViewBag.listImgUserBN.Count > 0)
+                {
+                    foreach (instaPics_website.Models.POCO.StringImage img in ViewBag.listImgUserBN)
+                    {
+                        <div class="col-md-2">
+                            <form role="form" method="post" action="@Url.Action("favorite")">
+                                <p><img src="@img.uri" alt="img" /></p>
+
+                                <!--si l'utilisateur n'a pas encore aimé l'image, on met le bouton j'aime, sinon je n'aime plus-->
+                                @if (img.like == false)
+                                {
+                                    <input type="hidden" name="gestionfav" value="addlike" />
+                                    <p><button type="submit" class="btn btn-primary like_button">J'aime</button></p>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="gestionfav" value="removelike" />
+                                    <p><button type="submit" class="btn btn-primary like_button">Je n'aime plus</button></p>
+                                }
+                                <input type="hidden" name="nameimg" value="@img.name"/>
+                            </form>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h5>Aucune de vos images n'a été traitée</h5>
+                }
+            }
+        </section>
+
+        <!--partie des images des autres en noirs et blancs-->
+        <section class="imgother row">
+            <h3>Les images des autres</h3>
+            @{
+                if (ViewBag.listImgOther.Count > 0)
+                {
+                    foreach (instaPics_website.Models.POCO.StringImage img in ViewBag.listImgOther)
+                    {
+                    <div class="col-md-2">
+                        <form role="form" method="post" action="@Url.Action("favorite")">
+                            <p><img src="@img.uri" alt="img" /></p>
+                            <!--si l'utilisateur n'a pas encore aimé l'image, on met le bouton j'aime, sinon je n'aime plus-->
+                            @if (img.like == false)
+                            {
+                                <input type="hidden" name="gestionfav" value="addlike" />
+                                 <p><button type="submit" class="btn btn-primary like_button">J'aime</button></p>
+                            }
+                            else
+                            {
+                                <input type="hidden" name="gestionfav" value="removelike" />
+                                 <p><button type="submit" class="btn btn-primary like_button">Je n'aime plus</button></p>
+                            }
+                            <input type="hidden" name="nameimg" value="@img.name" ng-model="nameimg"/>
+                        </form>
+                    </div>
+                    }
+                }
+                else
+                {
+                    <h5>Aucune des images des autres n'a été traitée</h5>
+                }
+            }
+        </section>
+
+
+        <!--modal d'upload d'image-->
+        <!-- Modal -->
+        <div id="modalUpload" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form role="form" action="@Url.Action("uploadImage")" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Upload d'une image</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" name="file" id="file" data-file="file" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default">Envoyer</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </form>
+                </div>
+                <!--Fin Content Modal-->
+            </div>
+        </div>
+        <!-- Fin Modal-->
+</div>
+</div>
+
