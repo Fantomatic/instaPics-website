@@ -112,7 +112,7 @@ namespace instaPics_website.Models
 
                            foreach(ImgFavEntity myfav in lstFav)
                             {
-                                if(myfav.NameImage == myimg.name)
+                                if(myfav.NameImage == myimg.name && SessionUser.Username == myfav.Username)
                                 {
                                     like = true;
                                     break;
@@ -141,7 +141,7 @@ namespace instaPics_website.Models
 
                             foreach (ImgFavEntity myfav in lstFav)
                             {
-                                if (myfav.NameImage == myimg.name)
+                                if (myfav.NameImage == myimg.name && SessionUser.Username == myfav.Username)
                                 {
                                     like = true;
                                     break;
