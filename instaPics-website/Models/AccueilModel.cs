@@ -186,7 +186,7 @@ namespace instaPics_website.Models
         {
 
             CloudTable table = CreateCloudAzure.TableClient(Constants.TableImgFavStringKey);
-            IEnumerable<ImgFavEntity> query = (from ImgFav in table.CreateQuery<ImgFavEntity>() where ImgFav.NameImage == nameimg select ImgFav);
+            IEnumerable<ImgFavEntity> query = (from ImgFav in table.CreateQuery<ImgFavEntity>() where ImgFav.NameImage == nameimg where ImgFav.Username == SessionUser.Username select ImgFav);
 
             List<ImgFavEntity> imgSelect = query.ToList<ImgFavEntity>();
 
